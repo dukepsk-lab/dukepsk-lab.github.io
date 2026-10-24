@@ -47,19 +47,19 @@ code, .mono { font-family: var(--mono); font-size: 0.86em; }
 
 /* ---------- night bands ---------- */
 .night {
-  background-color: var(--night);
+  background-color: #101a28; /* --night, literal so tools can resolve it */
   background-image:
     linear-gradient(var(--night-rule) 1px, transparent 1px),
     linear-gradient(90deg, var(--night-rule) 1px, transparent 1px);
   background-size: 48px 48px;
   background-position: -1px -1px;
-  color: var(--on-night);
+  color: #f2eee3;
 }
 .night a { color: var(--gold); }
 .night a:hover { color: var(--on-night); }
 
 /* ---------- header ---------- */
-.top { position: sticky; top: 0; z-index: 10; background: var(--night); border-bottom: 1px solid var(--night-rule); }
+.top { position: sticky; top: 0; z-index: 10; background: #101a28; border-bottom: 1px solid var(--night-rule); }
 .top .wrap { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.25rem 2rem; padding-block: 0.9rem; }
 .top .handle { font-family: var(--mono); font-size: 0.95rem; font-weight: 500; color: var(--on-night); text-decoration: none; }
 .top nav { display: flex; flex-wrap: wrap; gap: 0.1rem 1.4rem; }
