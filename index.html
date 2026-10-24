@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dukepsk-lab: Quant research notebook</title>
+<meta name="description" content="Pre-registered tests of trading ideas, most of them rejected, with the numbers left in. Research and infrastructure by dukepsk-lab.">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f2eee3'/%3E%3Cpath d='M7 22 L13 12 L18 18 L25 8' fill='none' stroke='%23a3301d' stroke-width='2.5'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="handle" href="#top">dukepsk-lab</a>
+    <nav aria-label="Sections">
+      <a href="#register">Register</a>
+      <a href="#method">Method</a>
+      <a href="#repos">Repositories</a>
+      <a href="#journal">Journal</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <div class="wrap">
+    <h1>I test trading ideas until they break, and write down how.</h1>
+    <p class="lede">Most of my repositories are failed hypotheses with the numbers left in. The rest is the infrastructure that keeps those tests honest: checked data, causal features, purged validation, hard risk limits.</p>
+  </div>
+</section>
+
+<section class="register" id="register">
+  <div class="wrap">
+    <div class="sheet">
+      <table>
+        <caption>Hypothesis register, excerpt. Costs include spread and swap. R is profit in units of risk.</caption>
+        <thead>
+          <tr><th scope="col">ID</th><th scope="col">Idea</th><th scope="col">What was measured</th><th scope="col">Decision</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>H1</td><td>Intraday momentum, US100</td>
+            <td><span class="num">&minus;0.15 R</span> per trade, <span class="num">t = &minus;4.3</span></td>
+            <td><span class="verdict">Rejected</span></td>
+          </tr>
+          <tr>
+            <td>H3</td><td>30-minute opening-range breakout</td>
+            <td><span class="num">+0.084 R</span>, but stressed <span class="num">t = 1.04</span>, DSR <span class="num">0.06</span>, PBO <span class="num">0.77</span></td>
+            <td><span class="verdict">Rejected</span></td>
+          </tr>
+          <tr>
+            <td>H8</td><td>Overnight drift in index CFDs</td>
+            <td><span class="num">+0.13 R</span> gross, <span class="num">&minus;0.032 R</span> after swap and spread</td>
+            <td><span class="verdict">Rejected</span></td>
+          </tr>
+          <tr>
+            <td>H11</td><td>Hourly Donchian on 27 unseen FX pairs</td>
+            <td><span class="num">&minus;0.124 R</span> over <span class="num">32,594</span> trades, <span class="num">t = &minus;14</span></td>
+            <td><span class="verdict">Rejected</span></td>
+          </tr>
+          <tr>
+            <td>H14</td><td>Trend following across 20 markets</td>
+            <td>Stressed <span class="num">t = 2.86</span>, but Deflated Sharpe <span class="num">0.29</span> after 48 trials</td>
+            <td><span class="verdict">Rejected</span></td>
+          </tr>
+          <tr>
+            <td>H16</td><td>Trend plus G10 carry, equal risk</td>
+            <td>Net <span class="num">t = 3.93</span>, stressed <span class="num">t = 3.79</span>, DSR <span class="num">0.56</span>, one losing block</td>
+            <td><span class="verdict">Rejected</span><span class="verdict-note">The closest so far.</span></td>
+          </tr>
+          <tr>
+            <td>H16-F</td><td>Forward test of H16, shadow only, no orders</td>
+            <td>Passes if the 36-month <span class="num">t &ge; 2.0</span> and PSR <span class="num">&ge; 0.90</span></td>
+            <td><span class="verdict open">Collecting</span></td>
+          </tr>
+          <tr>
+            <td>F3</td><td>XAUUSD daily high at least $1 above the open</td>
+            <td>True on <span class="num">96.87%</span> of days. As a trade: stressed <span class="num">t = &minus;1.85</span>, DSR <span class="num">0.053</span></td>
+            <td><span class="verdict">Rejected</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="register-foot">From the register in my NQX repository (private for now). By its last entry, 69 variants had been counted toward the Deflated Sharpe, and none had passed every gate. A rejected hypothesis is never re-tested with tweaks.</p>
+  </div>
+</section>
+
+<section class="block" id="method">
+  <div class="wrap">
+    <h2>A result only counts if the rules were written before it existed.</h2>
+    <p>Every idea goes through the same steps. The point is not caution for its own sake: it is that every variant I try makes the next result less believable, so the number of trials has to be part of the answer.</p>
+    <ol class="steps">
+      <li><span><strong>Pre-register.</strong> Rules, variants, costs, data split and decision rule are committed before any backtest runs.</span></li>
+      <li><span><strong>Implement and review.</strong> Code is written from the document alone, then checked against it and for look-ahead.</span></li>
+      <li><span><strong>Development gate.</strong> Trade count, stressed t-statistic, Deflated Sharpe, probability of backtest overfitting, fold stability.</span></li>
+      <li><span><strong>Holdout.</strong> Opened once, and only if the development set passes.</span></li>
+      <li><span><strong>Record.</strong> The result goes into the same document. It is not edited afterwards.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="block" id="repos">
+  <div class="wrap">
+    <h2>Six repositories, in the order a question travels.</h2>
+    <p>Test counts are from local runs on a clean install. SIEVE, TRIAGE and Aethel are public. NQX, ICTraX and TFEX are private for now.</p>
+    <ol class="ledger">
+
+      <li>
+        <div class="who"><a href="https://github.com/dukepsk-lab/SIEVE">SIEVE</a><small>US100 CFD, MetaTrader 5</small></div>
+        <div>
+          <h3>Is the data what I think it is?</h3>
+          <p>A read-only audit of server clock, DST eras, tick-level spread regimes and session changes, re-derived by an independent second implementation. Costs measured here feed every later test. Phase 2 tests ideas under a plan frozen first, with the 2026 holdout locked.</p>
+          <dl>
+            <dt>Found</dt><dd>The broker clock is London time with daylight saving, not a fixed offset. Stage A: 0 of 8 candidates passed.</dd>
+            <dt>Tests</dt><dd><span class="num">111</span></dd>
+          </dl>
+        </div>
+      </li>
+
+      <li>
+        <div class="who">NQX<small>Hypothesis register and gates</small></div>
+        <div>
+          <h3>Does the idea survive rules written before the test?</h3>
+          <p>The register above, plus the code that runs it: data ingest and quality checks, features, an experiment runner, and promotion gates that count every trial. Swap and spread explain most of the intraday and daily failures.</p>
+          <dl>
+            <dt>Found</dt><dd>An early report assumed a fixed UTC+1 server clock. It was wrong, shifted winter sessions by an hour, and its results could not be reproduced. The report is marked superseded in the repo.</dd>
+          </dl>
+        </div>
+      </li>
+
+      <li>
+        <div class="who"><a href="https://github.com/dukepsk-lab/TRIAGE">TRIAGE</a><small>Triple-barrier meta-labeling</small></div>
+        <div>
+          <h3>Does an ML filter add anything under strict validation?</h3>
+          <p>Rule-based candidates, first-touch labels on M1 bars, a LightGBM filter, purged splits, CPCV, a trial registry and a shuffled-label leakage check. Three phases, each ending in a written decision.</p>
+          <dl>
+            <dt>Found</dt><dd>Pooling three majors gave an out-of-sample AUC of 0.559. Widening to six symbols (10,232 events) removed it: AUC stayed near 0.51 and calibration came out flat. Phase 3 was rejected.</dd>
+            <dt>Tests</dt><dd>Suite passes on a clean install</dd>
+          </dl>
+        </div>
+      </li>
+
+      <li>
+        <div class="who">ICTraX<small>XAUUSD, causal state machine</small></div>
+        <div>
+          <h3>Can a discretionary method be made testable?</h3>
+          <p>Sweeps, structure breaks and fair value gaps as a deterministic state machine. Structure is frozen once confirmed, fills require price to trade through the entry, and tests deliberately try to leak the future. Includes a FastAPI backend and a Next.js dashboard.</p>
+          <dl>
+            <dt>Not in the repo</dt><dd>Published backtest results.</dd>
+            <dt>Tests</dt><dd><span class="num">88</span></dd>
+          </dl>
+        </div>
+      </li>
+
+      <li>
+        <div class="who">TFEX<small>SET50 futures, Thailand</small></div>
+        <div>
+          <h3>The same discipline on a market I trade at home.</h3>
+          <p>A pipeline for S50 futures: explicit contract rolls so no return is measured across a roll, point-in-time joins, cost-aware labels, purged and embargoed walk-forward training, and a backtest with next-bar fills.</p>
+          <dl>
+            <dt>Not in the repo</dt><dd>Results, and a live broker adapter (it is a stub; tests run on a mock provider).</dd>
+            <dt>Tests</dt><dd><span class="num">224</span></dd>
+          </dl>
+        </div>
+      </li>
+
+      <li>
+        <div class="who"><a href="https://github.com/dukepsk-lab/Aethel">Aethel</a><small>MT5, ML plus LLM agents</small></div>
+        <div>
+          <h3>Where do language models belong in a trading loop?</h3>
+          <p>Behind a hard limit. An ML signal is reviewed by agents that can propose and veto but never size or relax a rule. A plain-Python risk gate fails closed, and execution has no model calls and runs once per decision. Shadow mode logs orders without sending them.</p>
+          <dl>
+            <dt>Not in the repo</dt><dd>Live or shadow results.</dd>
+            <dt>Tests</dt><dd><span class="num">66</span></dd>
+          </dl>
+        </div>
+      </li>
+
+    </ol>
+  </div>
+</section>
+
+<section class="block" id="journal">
+  <div class="wrap">
+    <h2>How I got here, including the parts that did not work.</h2>
+    <div class="journal">
+
+      <article class="entry">
+        <h3>Forex at university, then a bought EA</h3>
+        <dl>
+          <dt>Believed</dt><dd>Someone sells an automated system that works.</dd>
+          <dt>What broke it</dt><dd class="broke">I paid for one in my first job and lost the money. I could not check any claim it made.</dd>
+          <dt>Changed</dt><dd>I started building my own, so I could inspect every step.</dd>
+        </dl>
+      </article>
+
+      <article class="entry">
+        <h3>METEA: more indicators</h3>
+        <dl>
+          <dt>Believed</dt><dd>RSI, stochastic, EMA and MACD together, tuned long enough, make a system.</dd>
+          <dt>What broke it</dt><dd class="broke">The backtest looked better than expected. Live, it did not. That is when I learned the word overfitting.</dd>
+          <dt>Changed</dt><dd>I began testing one hypothesis at a time. Converting TradingView strategies to MQL5 did not find anything either.</dd>
+        </dl>
+      </article>
+
+      <article class="entry">
+        <h3>Janus: machine learning</h3>
+        <dl>
+          <dt>Believed</dt><dd>A CNN-LSTM with an XGBoost meta-model and Kelly sizing, built over several versions, would find the edge.</dd>
+          <dt>What broke it</dt><dd class="broke">The backtest was spectacular. Live, it was not. Tracing why taught me look-ahead bias.</dd>
+          <dt>Changed</dt><dd>Results that look too good now start an investigation. Every feature has to be available at the moment of the decision, and I count every trial.</dd>
+        </dl>
+      </article>
+
+      <article class="entry">
+        <h3>LLMs, then a harness</h3>
+        <dl>
+          <dt>Believed</dt><dd>Language models could speed up the coding.</dd>
+          <dt>What broke it</dt><dd class="broke">Early on they were weak at MQL5 and I stopped using them. They improved.</dd>
+          <dt>Changed</dt><dd>I stopped asking for code and started working inside a harness: pre-registered hypotheses, tests, leakage checks, trial counts, real costs before anyone looks at a result. NQX came out of that.</dd>
+        </dl>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="block" id="rules">
+  <div class="wrap">
+    <h2>What I took from it.</h2>
+    <ol class="rules">
+      <li>A result that looks too good is a bug until shown otherwise.</li>
+      <li>Every feature must be knowable at the time of the decision.</li>
+      <li>Count every trial, then correct for them.</li>
+      <li>Put real costs in before looking at an equity curve.</li>
+      <li>Validate out of sample with purging, then believe it.</li>
+    </ol>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Research, not investment advice. Backtests describe the past under stated assumptions.</p>
+    <p><a href="https://github.com/dukepsk-lab">github.com/dukepsk-lab</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
