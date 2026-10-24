@@ -4,9 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>dukepsk-lab: Quant research notebook</title>
-<meta name="description" content="Pre-registered tests of trading ideas, most of them rejected, with the numbers left in. Research and infrastructure by dukepsk-lab.">
-<meta name="color-scheme" content="light">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f2eee3'/%3E%3Cpath d='M7 22 L13 12 L18 18 L25 8' fill='none' stroke='%23a3301d' stroke-width='2.5'/%3E%3C/svg%3E">
+<meta name="description" content="21 trading ideas tested under pre-registered rules. Three crossed the significance gate and none survived. The numbers, the code and how I learned to test.">
+<meta property="og:title" content="dukepsk-lab: Quant research notebook">
+<meta property="og:description" content="21 trading ideas, tested under rules written first. Three crossed the gate, none survived. See the plot.">
+<meta property="og:type" content="website">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#101a28">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23101a28'/%3E%3Ccircle cx='9' cy='20' r='3' fill='%23ee8a62'/%3E%3Ccircle cx='16' cy='14' r='3' fill='%23ee8a62'/%3E%3Ccircle cx='24' cy='9' r='3.5' fill='%23e8c872'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap">
@@ -18,6 +22,7 @@
   <div class="wrap">
     <a class="handle" href="#top">dukepsk-lab</a>
     <nav aria-label="Sections">
+      <a href="#plot">The plot</a>
       <a href="#register">Register</a>
       <a href="#method">Method</a>
       <a href="#repos">Repositories</a>
@@ -28,15 +33,56 @@
 
 <main id="top">
 
-<section class="hero">
+<section class="night hero">
   <div class="wrap">
     <h1>I test trading ideas until they break, and write down how.</h1>
     <p class="lede">Most of my repositories are failed hypotheses with the numbers left in. The rest is the infrastructure that keeps those tests honest: checked data, causal features, purged validation, hard risk limits.</p>
+    <p class="cta">
+      <a class="btn primary" href="#plot">See the evidence</a>
+      <a class="btn" href="#repos">Browse the repositories</a>
+      <a class="textlink" href="https://github.com/dukepsk-lab">GitHub &rarr;</a>
+    </p>
   </div>
 </section>
 
-<section class="register" id="register">
+<section class="night plotsec" id="plot">
   <div class="wrap">
+    <h2>21 ideas. 3 crossed the line. None survived.</h2>
+    <p class="plot-lede">Each dot is a hypothesis from my register, placed by its stressed t-statistic after costs and slippage. The gold zone is where a result starts to look real. Select a dot to read what happened.</p>
+
+    <div class="plate">
+      <p class="swipe" aria-hidden="true">Swipe the plot sideways &rarr;</p>
+      <div class="plate-scroll">
+<svg class="plot" viewBox="0 0 1000 400" role="group" aria-label="Strip plot of stressed t-statistics for 21 hypotheses">
+<rect class="zone" x="773.9" y="40" width="206.1" height="312"/>
+<g><line class="tick" x1="109.2" x2="109.2" y1="60" y2="352"/><text class="axis" x="109.2" y="378" text-anchor="middle">-5</text></g><g><line class="tick" x1="197.8" x2="197.8" y1="60" y2="352"/><text class="axis" x="197.8" y="378" text-anchor="middle">-4</text></g><g><line class="tick" x1="286.4" x2="286.4" y1="60" y2="352"/><text class="axis" x="286.4" y="378" text-anchor="middle">-3</text></g><g><line class="tick" x1="375.1" x2="375.1" y1="60" y2="352"/><text class="axis" x="375.1" y="378" text-anchor="middle">-2</text></g><g><line class="tick" x1="463.7" x2="463.7" y1="60" y2="352"/><text class="axis" x="463.7" y="378" text-anchor="middle">-1</text></g><g><line class="tick" x1="552.3" x2="552.3" y1="60" y2="352"/><text class="axis" x="552.3" y="378" text-anchor="middle">0</text></g><g><line class="tick" x1="640.9" x2="640.9" y1="60" y2="352"/><text class="axis" x="640.9" y="378" text-anchor="middle">+1</text></g><g><line class="tick" x1="729.6" x2="729.6" y1="60" y2="352"/><text class="axis" x="729.6" y="378" text-anchor="middle">+2</text></g><g><line class="tick" x1="818.2" x2="818.2" y1="60" y2="352"/><text class="axis" x="818.2" y="378" text-anchor="middle">+3</text></g><g><line class="tick" x1="906.8" x2="906.8" y1="60" y2="352"/><text class="axis" x="906.8" y="378" text-anchor="middle">+4</text></g>
+<line class="gate" x1="773.9" x2="773.9" y1="40" y2="352"/>
+<text class="gate-label" x="783.9" y="62">gate: stressed t &#8805; 2.5</text>
+<text class="side-label" x="56" y="34">&#8592; costs eat it</text>
+<text class="axis-title" x="508" y="398" text-anchor="middle">stressed t-statistic (plain t for H1, H11)</text>
+<g class="dot" tabindex="0" role="button" data-id="H11" style="--i:0" aria-label="H11, Hourly Donchian, 27 unseen FX pairs, t -14"><circle cx="91.5" cy="218.0" r="15"/><text x="91.5" y="221.5">H11</text><title>H11: Hourly Donchian, 27 unseen FX pairs (t -14)</title></g><g class="dot" tabindex="0" role="button" data-id="H1" style="--i:1" aria-label="H1, Intraday momentum, US100, t -4.3"><circle cx="171.2" cy="218.0" r="15"/><text x="171.2" y="221.5">H1</text><title>H1: Intraday momentum, US100 (t -4.3)</title></g><g class="dot" tabindex="0" role="button" data-id="H4" style="--i:2" aria-label="H4, Midday reversion to TWAP, t -4.29"><circle cx="172.1" cy="251.0" r="15"/><text x="172.1" y="254.5">H4</text><title>H4: Midday reversion to TWAP (t -4.29)</title></g><g class="dot" tabindex="0" role="button" data-id="H8" style="--i:3" aria-label="H8, Overnight drift in index CFDs, t -4.1"><circle cx="188.9" cy="185.0" r="15"/><text x="188.9" y="188.5">H8</text><title>H8: Overnight drift in index CFDs (t -4.1)</title></g><g class="dot" tabindex="0" role="button" data-id="H10" style="--i:4" aria-label="H10, Hourly Donchian, multi-asset, t -3.9"><circle cx="206.7" cy="218.0" r="15"/><text x="206.7" y="221.5">H10</text><title>H10: Hourly Donchian, multi-asset (t -3.9)</title></g><g class="dot" tabindex="0" role="button" data-id="F1" style="--i:5" aria-label="F1, Gold expert advisor, out of sample, t -2.47"><circle cx="333.4" cy="218.0" r="15"/><text x="333.4" y="221.5">F1</text><title>F1: Gold expert advisor, out of sample (t -2.47)</title></g><g class="dot" tabindex="0" role="button" data-id="F3" style="--i:6" aria-label="F3, Gold high at least $1 above the open, t -1.85"><circle cx="388.4" cy="218.0" r="15"/><text x="388.4" y="221.5">F3</text><title>F3: Gold high at least $1 above the open (t -1.85)</title></g><g class="dot" tabindex="0" role="button" data-id="H20" style="--i:7" aria-label="H20, Gold rebound after a London decline, t -1.48"><circle cx="421.1" cy="218.0" r="15"/><text x="421.1" y="221.5">H20</text><title>H20: Gold rebound after a London decline (t -1.48)</title></g><g class="dot" tabindex="0" role="button" data-id="H7b" style="--i:8" aria-label="H7b, Cross-asset trend, fill time fixed, t -0.81"><circle cx="480.5" cy="218.0" r="15"/><text x="480.5" y="221.5">H7b</text><title>H7b: Cross-asset trend, fill time fixed (t -0.81)</title></g><g class="dot" tabindex="0" role="button" data-id="H21" style="--i:9" aria-label="H21, ML intraday reversal entry, t -0.66"><circle cx="493.8" cy="251.0" r="15"/><text x="493.8" y="254.5">H21</text><title>H21: ML intraday reversal entry (t -0.66)</title></g><g class="dot" tabindex="0" role="button" data-id="H7" style="--i:10" aria-label="H7, Cross-asset trend, daily, t -0.11"><circle cx="542.6" cy="218.0" r="15"/><text x="542.6" y="221.5">H7</text><title>H7: Cross-asset trend, daily (t -0.11)</title></g><g class="dot" tabindex="0" role="button" data-id="H19" style="--i:11" aria-label="H19, Gold Asian-session drift, t 0.15"><circle cx="565.6" cy="251.0" r="15"/><text x="565.6" y="254.5">H19</text><title>H19: Gold Asian-session drift (t 0.15)</title></g><g class="dot" tabindex="0" role="button" data-id="H6" style="--i:12" aria-label="H6, ML strategy selection, t 0.16"><circle cx="566.5" cy="185.0" r="15"/><text x="566.5" y="188.5">H6</text><title>H6: ML strategy selection (t 0.16)</title></g><g class="dot" tabindex="0" role="button" data-id="H9" style="--i:13" aria-label="H9, US30 opening-range breakout, t 0.43"><circle cx="590.4" cy="218.0" r="15"/><text x="590.4" y="221.5">H9</text><title>H9: US30 opening-range breakout (t 0.43)</title></g><g class="dot" tabindex="0" role="button" data-id="H12" style="--i:14" aria-label="H12, Trend on 30+ years of daily data, t 0.57"><circle cx="602.8" cy="251.0" r="15"/><text x="602.8" y="254.5">H12</text><title>H12: Trend on 30+ years of daily data (t 0.57)</title></g><g class="dot" tabindex="0" role="button" data-id="H3" style="--i:15" aria-label="H3, 30-minute opening-range breakout, t 1.04"><circle cx="644.5" cy="218.0" r="15"/><text x="644.5" y="221.5">H3</text><title>H3: 30-minute opening-range breakout (t 1.04)</title></g><g class="dot" tabindex="0" role="button" data-id="H5" style="--i:16" aria-label="H5, Regime-based strategy selection, t 1.15"><circle cx="654.2" cy="251.0" r="15"/><text x="654.2" y="254.5">H5</text><title>H5: Regime-based strategy selection (t 1.15)</title></g><g class="dot" tabindex="0" role="button" data-id="H13" style="--i:17" aria-label="H13, Canonical 12-month trend, t 2.1"><circle cx="738.4" cy="218.0" r="15"/><text x="738.4" y="221.5">H13</text><title>H13: Canonical 12-month trend (t 2.1)</title></g><g class="dot crossed" tabindex="0" role="button" data-id="H15" style="--i:18" aria-label="H15, G10 FX carry, t 2.5"><circle cx="773.9" cy="218.0" r="15"/><text x="773.9" y="221.5">H15</text><title>H15: G10 FX carry (t 2.5)</title></g><g class="dot crossed" tabindex="0" role="button" data-id="H14" style="--i:19" aria-label="H14, Trend across 20 markets, t 2.86"><circle cx="805.8" cy="251.0" r="15"/><text x="805.8" y="254.5">H14</text><title>H14: Trend across 20 markets (t 2.86)</title></g><g class="dot crossed" tabindex="0" role="button" data-id="H16" style="--i:20" aria-label="H16, Trend plus carry, equal risk, t 3.79"><circle cx="888.2" cy="218.0" r="15"/><text x="888.2" y="221.5">H16</text><title>H16: Trend plus carry, equal risk (t 3.79)</title></g>
+</svg>
+      </div>
+      <div class="readout" id="readout" aria-live="polite">
+        <div class="r-id" id="r-id">H16</div>
+        <div class="r-body">
+          <h3 id="r-idea">Trend plus carry, equal risk</h3>
+          <p id="r-note">Closest of all. One losing block. Forward test running.</p>
+        </div>
+        <dl class="r-nums">
+          <div><dt>Stressed t</dt><dd id="r-t">3.79</dd></div>
+          <div><dt>Deflated Sharpe</dt><dd id="r-dsr">0.56</dd></div>
+          <div><dt>Decision</dt><dd id="r-dec">Rejected</dd></div>
+        </dl>
+      </div>
+    </div>
+    <p class="plot-foot">Three results sit in the gold zone: H14, H15 and H16. All three were still rejected, on Deflated Sharpe once the number of trials is counted, or on a losing sub-period. H11 is far off the left edge at t = &minus;14. From the register in my NQX repository (private for now).</p>
+  </div>
+</section>
+
+<section class="register block" id="register">
+  <div class="wrap">
+    <h2>The register, as written.</h2>
     <div class="sheet">
       <table>
         <caption>Hypothesis register, excerpt. Costs include spread and swap. R is profit in units of risk.</caption>
@@ -87,11 +133,11 @@
         </tbody>
       </table>
     </div>
-    <p class="register-foot">From the register in my NQX repository (private for now). By its last entry, 69 variants had been counted toward the Deflated Sharpe, and none had passed every gate. A rejected hypothesis is never re-tested with tweaks.</p>
+    <p class="register-foot">By the register's last entry, 69 variants had been counted toward the Deflated Sharpe, and none had passed every gate. A rejected hypothesis is never re-tested with tweaks.</p>
   </div>
 </section>
 
-<section class="block" id="method">
+<section class="block alt" id="method">
   <div class="wrap">
     <h2>A result only counts if the rules were written before it existed.</h2>
     <p>Every idea goes through the same steps. The point is not caution for its own sake: it is that every variant I try makes the next result less believable, so the number of trials has to be part of the answer.</p>
@@ -112,7 +158,7 @@
     <ol class="ledger">
 
       <li>
-        <div class="who"><a href="https://github.com/dukepsk-lab/SIEVE">SIEVE</a><small>US100 CFD, MetaTrader 5</small></div>
+        <div class="who"><a href="https://github.com/dukepsk-lab/SIEVE">SIEVE</a><small>US100 CFD, MetaTrader 5</small><span class="chip live">Public</span></div>
         <div>
           <h3>Is the data what I think it is?</h3>
           <p>A read-only audit of server clock, DST eras, tick-level spread regimes and session changes, re-derived by an independent second implementation. Costs measured here feed every later test. Phase 2 tests ideas under a plan frozen first, with the 2026 holdout locked.</p>
@@ -120,14 +166,15 @@
             <dt>Found</dt><dd>The broker clock is London time with daylight saving, not a fixed offset. Stage A: 0 of 8 candidates passed.</dd>
             <dt>Tests</dt><dd><span class="num">111</span></dd>
           </dl>
+          <a class="more" href="https://github.com/dukepsk-lab/SIEVE">Read the repository &rarr;</a>
         </div>
       </li>
 
       <li>
-        <div class="who">NQX<small>Hypothesis register and gates</small></div>
+        <div class="who">NQX<small>Hypothesis register and gates</small><span class="chip">Private for now</span></div>
         <div>
           <h3>Does the idea survive rules written before the test?</h3>
-          <p>The register above, plus the code that runs it: data ingest and quality checks, features, an experiment runner, and promotion gates that count every trial. Swap and spread explain most of the intraday and daily failures.</p>
+          <p>The register behind the plot above, plus the code that runs it: data ingest and quality checks, features, an experiment runner, and promotion gates that count every trial. Swap and spread explain most of the intraday and daily failures.</p>
           <dl>
             <dt>Found</dt><dd>An early report assumed a fixed UTC+1 server clock. It was wrong, shifted winter sessions by an hour, and its results could not be reproduced. The report is marked superseded in the repo.</dd>
           </dl>
@@ -135,7 +182,7 @@
       </li>
 
       <li>
-        <div class="who"><a href="https://github.com/dukepsk-lab/TRIAGE">TRIAGE</a><small>Triple-barrier meta-labeling</small></div>
+        <div class="who"><a href="https://github.com/dukepsk-lab/TRIAGE">TRIAGE</a><small>Triple-barrier meta-labeling</small><span class="chip live">Public</span></div>
         <div>
           <h3>Does an ML filter add anything under strict validation?</h3>
           <p>Rule-based candidates, first-touch labels on M1 bars, a LightGBM filter, purged splits, CPCV, a trial registry and a shuffled-label leakage check. Three phases, each ending in a written decision.</p>
@@ -143,11 +190,12 @@
             <dt>Found</dt><dd>Pooling three majors gave an out-of-sample AUC of 0.559. Widening to six symbols (10,232 events) removed it: AUC stayed near 0.51 and calibration came out flat. Phase 3 was rejected.</dd>
             <dt>Tests</dt><dd>Suite passes on a clean install</dd>
           </dl>
+          <a class="more" href="https://github.com/dukepsk-lab/TRIAGE">Read the repository &rarr;</a>
         </div>
       </li>
 
       <li>
-        <div class="who">ICTraX<small>XAUUSD, causal state machine</small></div>
+        <div class="who">ICTraX<small>XAUUSD, causal state machine</small><span class="chip">Private for now</span></div>
         <div>
           <h3>Can a discretionary method be made testable?</h3>
           <p>Sweeps, structure breaks and fair value gaps as a deterministic state machine. Structure is frozen once confirmed, fills require price to trade through the entry, and tests deliberately try to leak the future. Includes a FastAPI backend and a Next.js dashboard.</p>
@@ -159,9 +207,9 @@
       </li>
 
       <li>
-        <div class="who">TFEX<small>SET50 futures, Thailand</small></div>
+        <div class="who">TFEX<small>SET50 futures, Thailand</small><span class="chip">Private for now</span></div>
         <div>
-          <h3>The same discipline on a market I trade at home.</h3>
+          <h3>The same discipline on my home market.</h3>
           <p>A pipeline for S50 futures: explicit contract rolls so no return is measured across a roll, point-in-time joins, cost-aware labels, purged and embargoed walk-forward training, and a backtest with next-bar fills.</p>
           <dl>
             <dt>Not in the repo</dt><dd>Results, and a live broker adapter (it is a stub; tests run on a mock provider).</dd>
@@ -171,7 +219,7 @@
       </li>
 
       <li>
-        <div class="who"><a href="https://github.com/dukepsk-lab/Aethel">Aethel</a><small>MT5, ML plus LLM agents</small></div>
+        <div class="who"><a href="https://github.com/dukepsk-lab/Aethel">Aethel</a><small>MT5, ML plus LLM agents</small><span class="chip live">Public</span></div>
         <div>
           <h3>Where do language models belong in a trading loop?</h3>
           <p>Behind a hard limit. An ML signal is reviewed by agents that can propose and veto but never size or relax a rule. A plain-Python risk gate fails closed, and execution has no model calls and runs once per decision. Shadow mode logs orders without sending them.</p>
@@ -179,10 +227,20 @@
             <dt>Not in the repo</dt><dd>Live or shadow results.</dd>
             <dt>Tests</dt><dd><span class="num">66</span></dd>
           </dl>
+          <a class="more" href="https://github.com/dukepsk-lab/Aethel">Read the repository &rarr;</a>
         </div>
       </li>
 
     </ol>
+  </div>
+</section>
+
+<section class="night quote">
+  <div class="wrap">
+    <blockquote>
+      <p>The backtest was spectacular. Live, it was not.</p>
+      <footer>Janus, my first machine-learning system. It taught me look-ahead bias.</footer>
+    </blockquote>
   </div>
 </section>
 
@@ -231,7 +289,7 @@
   </div>
 </section>
 
-<section class="block" id="rules">
+<section class="block alt" id="rules">
   <div class="wrap">
     <h2>What I took from it.</h2>
     <ol class="rules">
@@ -246,12 +304,54 @@
 
 </main>
 
-<footer>
+<footer class="night">
   <div class="wrap">
+    <a class="big" href="https://github.com/dukepsk-lab">Read the code on GitHub &rarr;</a>
     <p>Research, not investment advice. Backtests describe the past under stated assumptions.</p>
-    <p><a href="https://github.com/dukepsk-lab">github.com/dukepsk-lab</a></p>
   </div>
 </footer>
 
+<script>
+(function () {
+  var DATA = {"H1": {"idea": "Intraday momentum, US100", "t": -4.3, "note": "All four variants negative. Holdout not opened.", "dsr": null, "crossed": false}, "H3": {"idea": "30-minute opening-range breakout", "t": 1.04, "note": "+0.084 R before the stress. PBO 0.77.", "dsr": 0.06, "crossed": false}, "H4": {"idea": "Midday reversion to TWAP", "t": -4.29, "note": "All variants negative.", "dsr": 0.0, "crossed": false}, "H5": {"idea": "Regime-based strategy selection", "t": 1.15, "note": "102 trades, below the 500 minimum.", "dsr": 0.44, "crossed": false}, "H6": {"idea": "ML strategy selection", "t": 0.16, "note": "Worse than always running the best single rule.", "dsr": 0.006, "crossed": false}, "H7": {"idea": "Cross-asset trend, daily", "t": -0.11, "note": "Gross edge about half eaten by swap.", "dsr": null, "crossed": false}, "H7b": {"idea": "Cross-asset trend, fill time fixed", "t": -0.81, "note": "Gross +9.8%, mostly eaten by swap.", "dsr": 0.2, "crossed": false}, "H8": {"idea": "Overnight drift in index CFDs", "t": -4.1, "note": "+0.13 R gross, -0.032 R after swap and spread.", "dsr": null, "crossed": false}, "H9": {"idea": "US30 opening-range breakout", "t": 0.43, "note": "Does not replicate the H3 result.", "dsr": null, "crossed": false}, "H10": {"idea": "Hourly Donchian, multi-asset", "t": -3.9, "note": "Gross +0.07 R eaten by spread and swap.", "dsr": null, "crossed": false}, "H11": {"idea": "Hourly Donchian, 27 unseen FX pairs", "t": -14.0, "note": "-0.124 R over 32,594 trades. Plain t, off the chart.", "dsr": null, "crossed": false}, "H12": {"idea": "Trend on 30+ years of daily data", "t": 0.57, "note": "Net t 2.72, but the edge decays from Sharpe 1.3 to 0.06.", "dsr": null, "crossed": false}, "H13": {"idea": "Canonical 12-month trend", "t": 2.1, "note": "Needs 2.5. DSR 0.12.", "dsr": 0.12, "crossed": false}, "H14": {"idea": "Trend across 20 markets", "t": 2.86, "note": "Crosses the gate. Fails Deflated Sharpe after 48 trials.", "dsr": 0.29, "crossed": true}, "H15": {"idea": "G10 FX carry", "t": 2.5, "note": "Crosses the gate. Fails Deflated Sharpe.", "dsr": 0.18, "crossed": true}, "H16": {"idea": "Trend plus carry, equal risk", "t": 3.79, "note": "Closest of all. One losing block. Forward test running.", "dsr": 0.56, "crossed": true}, "F1": {"idea": "Gold expert advisor, out of sample", "t": -2.47, "note": "Hit its own loss stop in 2022.", "dsr": null, "crossed": false}, "F3": {"idea": "Gold high at least $1 above the open", "t": -1.85, "note": "The fact was true on 96.87% of days. The trade lost.", "dsr": 0.053, "crossed": false}, "H19": {"idea": "Gold Asian-session drift", "t": 0.15, "note": "Positive drift, fails the gate.", "dsr": 0.11, "crossed": false}, "H20": {"idea": "Gold rebound after a London decline", "t": -1.48, "note": "No rebound found.", "dsr": 0.0003, "crossed": false}, "H21": {"idea": "ML intraday reversal entry", "t": -0.66, "note": "Upper bound; 24,206 candidates.", "dsr": null, "crossed": false}};
+  var dots = document.querySelectorAll('.plot .dot');
+  var el = function (id) { return document.getElementById(id); };
+  var fmt = function (n) { return (n < 0 ? '−' : '') + Math.abs(n).toString(); };
+  function show(id) {
+    var d = DATA[id]; if (!d) return;
+    el('r-id').textContent = id;
+    el('r-idea').textContent = d.idea;
+    el('r-note').textContent = d.note;
+    el('r-t').textContent = fmt(d.t);
+    el('r-dsr').textContent = d.dsr === null ? 'not recorded' : fmt(d.dsr);
+    el('r-dec').textContent = 'Rejected';
+    el('readout').classList.toggle('crossed', !!d.crossed);
+    dots.forEach(function (g) { g.classList.toggle('selected', g.getAttribute('data-id') === id); });
+  }
+  dots.forEach(function (g) {
+    var id = g.getAttribute('data-id');
+    g.addEventListener('click', function () { show(id); });
+    g.addEventListener('mouseenter', function () { show(id); });
+    g.addEventListener('focus', function () { show(id); });
+    g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(id); } });
+  });
+  show('H16');
+
+  var links = document.querySelectorAll('.top nav a');
+  if ('IntersectionObserver' in window) {
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting && map[en.target.id]) {
+          links.forEach(function (a) { a.removeAttribute('aria-current'); });
+          map[en.target.id].setAttribute('aria-current', 'true');
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    Object.keys(map).forEach(function (id) { var s = document.getElementById(id); if (s) io.observe(s); });
+  }
+})();
+</script>
 </body>
 </html>
