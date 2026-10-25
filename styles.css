@@ -182,15 +182,47 @@ h1 {
 .quote p { margin: 0; font-style: italic; font-weight: 400; font-size: clamp(2.2rem, 5.6vw, 4.5rem); line-height: 1.08; letter-spacing: -0.02em; text-wrap: balance; }
 .quote footer { margin-top: 1.5rem; max-width: 46ch; font-style: normal; font-size: 1.05rem; color: var(--on-night-soft); }
 
-/* journal */
-.journal { display: grid; }
-.entry { display: grid; grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); gap: 0.5rem clamp(1.5rem, 5vw, 4rem); padding-block: 1.9rem; border-top: 1px solid var(--rule); }
-.entry:first-child { border-top: 0; padding-top: 0; }
-.entry h3 { margin: 0; font-weight: 500; font-size: 1.35rem; line-height: 1.25; text-wrap: balance; }
-.entry dl { margin: 0; display: grid; grid-template-columns: 6.5rem 1fr; gap: 0.5rem 1rem; max-width: var(--measure); }
-.entry dt { font-family: var(--mono); font-size: 0.78rem; color: var(--ink-soft); padding-top: 0.35rem; }
-.entry dd { margin: 0; }
-.entry dd.broke { color: var(--stamp); }
+/* roadmap */
+.road-note { color: var(--ink-soft); margin-bottom: 2.25rem !important; }
+.road { list-style: none; margin: 0; padding: 0; position: relative; max-width: 54rem; }
+.road::before { content: ""; position: absolute; left: 0.62rem; top: 0.5rem; bottom: 0.5rem; width: 2px; background: var(--ink); }
+.node { position: relative; padding-left: 2.6rem; }
+.node details { padding-block: 0.9rem; }
+.node summary { list-style: none; cursor: pointer; display: block; padding: 0.25rem 2.25rem 0.25rem 0; position: relative; border-radius: 2px; }
+.node summary::-webkit-details-marker { display: none; }
+.node summary::before {
+  content: ""; position: absolute; left: -2.6rem; top: 0.55rem; width: 1.3rem; height: 1.3rem; border-radius: 50%;
+  background: var(--paper); border: 2px solid var(--ink); box-shadow: 0 0 0 5px var(--paper-deep);
+  transition: transform 0.2s, background-color 0.2s;
+}
+.node.lesson summary::before { border-color: var(--stamp); }
+.node.built summary::before { background: var(--ink); }
+.node.live summary::before { border-color: var(--blue); background: var(--blue); }
+.node summary:hover::before { transform: scale(1.18); }
+.node summary::after { content: "+"; position: absolute; right: 0; top: 0.1rem; font-family: var(--mono); font-size: 1.4rem; color: var(--ink-soft); transition: transform 0.2s; }
+.node details[open] > summary::after { content: "-"; }
+.node .t { display: block; font-size: 1.45rem; font-weight: 500; line-height: 1.2; letter-spacing: -0.01em; }
+.node .l { display: block; margin-top: 0.2rem; color: var(--ink-soft); font-size: 1.02rem; }
+.node.live .t::after { content: "Live"; margin-left: 0.7rem; font-family: var(--mono); font-size: 0.72rem; font-weight: 500; vertical-align: 0.2em; color: var(--blue); border: 1.5px solid var(--blue); border-radius: 2px; padding: 0.15rem 0.5rem; }
+@media (prefers-reduced-motion: no-preference) {
+  .node.live summary::before { animation: pulse 2.4s ease-out infinite; }
+}
+@keyframes pulse { 0% { box-shadow: 0 0 0 5px var(--paper-deep), 0 0 0 5px rgb(31 58 95 / 0.5); } 100% { box-shadow: 0 0 0 5px var(--paper-deep), 0 0 0 16px rgb(31 58 95 / 0); } }
+.node .detail { padding: 1rem 0 0.5rem; max-width: var(--measure); }
+.node .detail p { margin: 0 0 0.9rem; }
+.node .detail dl { margin: 0; display: grid; grid-template-columns: 6.5rem 1fr; gap: 0.5rem 1rem; }
+.node .detail dt { font-family: var(--mono); font-size: 0.78rem; color: var(--ink-soft); padding-top: 0.35rem; }
+.node .detail dd { margin: 0; }
+.node .detail dd.broke { color: var(--stamp); }
+.node .detail h4 { margin: 1.6rem 0 0.4rem; font-size: 1.1rem; font-weight: 600; }
+.node .detail ul { margin: 0 0 1rem; padding-left: 1.2rem; }
+.node .detail li { margin-bottom: 0.5rem; }
+.node.live .detail { max-width: 46rem; }
+.mini { width: 100%; border-collapse: collapse; margin: 1rem 0 0.5rem; font-size: 1rem; border: 1px solid var(--ink); background: var(--paper); }
+.mini caption { text-align: left; padding: 0.6rem 0.9rem; font-family: var(--mono); font-size: 0.78rem; color: var(--ink-soft); border-bottom: 1px solid var(--ink); }
+.mini th { text-align: left; font-weight: 500; color: var(--ink-soft); padding: 0.5rem 0.9rem; background: var(--paper-deep); border-bottom: 1px solid var(--rule); }
+.mini td { padding: 0.7rem 0.9rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.mini tr:last-child td { border-bottom: 0; }
 
 .rules { list-style: none; margin: 0; padding: 0; max-width: 46rem; }
 .rules li { padding-block: 0.9rem; border-top: 1px solid var(--ink-soft); font-size: 1.25rem; }
@@ -209,9 +241,15 @@ footer p { margin: 1.75rem 0 0; color: var(--on-night-soft); font-size: 1rem; ma
   .top { position: static; }
   .swipe { display: block; }
   .ledger > li { margin-inline: 0; padding-inline: 0; }
-  .ledger > li, .entry { grid-template-columns: 1fr; }
-  .ledger dl, .entry dl { grid-template-columns: 1fr; gap: 0; }
-  .ledger dt, .entry dt { padding-top: 0.6rem; }
+  .ledger > li { grid-template-columns: 1fr; }
+  .ledger dl, .node .detail dl { grid-template-columns: 1fr; gap: 0; }
+  .ledger dt, .node .detail dt { padding-top: 0.6rem; }
+  .node { padding-left: 2.3rem; }
+  .node summary::before { left: -2.3rem; }
+  .mini, .mini tbody, .mini tr, .mini td, .mini caption { display: block; }
+  .mini thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .mini tr { padding: 0.7rem 0.9rem; border-bottom: 1px solid var(--rule); }
+  .mini td { padding: 0.1rem 0; border: 0; }
   .sheet table, .sheet tbody, .sheet tr, .sheet td { display: block; }
   .sheet thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
   .sheet tr { padding: 0.9rem 1.1rem; border-bottom: 1px solid var(--rule); }

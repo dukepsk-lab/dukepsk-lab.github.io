@@ -4,7 +4,10 @@ Every number comes from docs/hypotheses/README.md in the NQX repo (stressed t-st
 register records one; plain t for H1 and H11). Run: python build.py
 """
 import json
+from html import escape
 from pathlib import Path
+
+from roadmap import ROADMAP
 
 GATE = 2.5
 # id, idea, t, note, dsr (None when not recorded)
@@ -31,6 +34,21 @@ POINTS = [
     ("H20", "Gold rebound after a London decline", -1.48, "No rebound found.", 0.0003),
     ("H21", "ML intraday reversal entry", -0.66, "Upper bound; 24,206 candidates.", None),
 ]
+
+
+def road_html():
+    out = ['<section class="block alt" id="roadmap">', '  <div class="wrap">',
+           '    <h2>The roadmap, including the stretches that went nowhere.</h2>',
+           '    <p class="road-note">Ordered by what I learned, not by date. Open a point to read it.</p>',
+           '    <ol class="road">']
+    for title, line, kind, body in ROADMAP:
+        opened = " open" if kind == "live" else ""
+        out.append(f'      <li class="node {kind}"><details{opened}><summary>'
+                   f'<span class="t">{escape(title)}</span><span class="l">{escape(line)}</span></summary>'
+                   f'<div class="detail">{body}</div></details></li>')
+    out += ['    </ol>', '  </div>', '</section>']
+    return "\n".join(out)
+
 
 W, H = 1000, 400
 X0, X1 = 56, 960
@@ -87,6 +105,7 @@ html = (here / "template.html").read_text(encoding="utf-8")
 html = (html.replace("{{CHART}}", chart)
             .replace("{{DATA}}", json.dumps(data, ensure_ascii=False))
             .replace("{{N}}", str(len(POINTS)))
-            .replace("{{CROSSED}}", str(len(crossed))))
+            .replace("{{CROSSED}}", str(len(crossed)))
+            .replace("{{ROADMAP}}", road_html()))
 (here / "index.html").write_text(html, encoding="utf-8", newline="\n")
 print(f"{len(POINTS)} points, crossed gate: {', '.join(crossed)}")
